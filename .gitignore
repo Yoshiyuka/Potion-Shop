@@ -1,4 +1,7 @@
 *.nds
 *.elf
 *.swp
+*.bak
+
+assets
 build
