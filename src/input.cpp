@@ -36,3 +36,17 @@ void Input::disableTouchpad()
 {
     touchEnabled = false;
 }
+
+//return a const shared pointer to const keypad data. Guarantee this function won't modify anything in the class.
+std::shared_ptr<uint32 const> const Input::watchKeyData() const
+{
+    std::shared_ptr<uint32 const> result(&keys); 
+    return result;
+}
+
+//return a const shared pointer to const touch data. Guarantee this function won't modify anything in the class. 
+std::shared_ptr<touchPosition const> const Input::watchTouchData() const
+{
+    std::shared_ptr<touchPosition const> result(touchData.get());
+    return result;
+}
