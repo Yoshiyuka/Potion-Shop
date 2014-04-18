@@ -7,17 +7,20 @@
 //Originally wanted to do templated state machines to support bitfields of various sizes (char/short/int)
 //It's quicker to just implement a single type and keep it simple though. Avoid premature optimization.
 
-class StateMachine
+template<class T> class StateMachine
 {
     public: 
         StateMachine(){};
         ~StateMachine(){}
 
-        void setState(unsigned int const &state);
-        void toggleState(unsigned int const &state);
-        void clearState(unsigned int const &state); 
+        void setState(unsigned int const &state){ flags |= state; };
+        void toggleState(unsigned int const &state){ flags ^= state; };
+        void clearState(unsigned int const &state){ flags &= state; };
 
-        bool isStateSet(unsigned int const &state) const; 
+        bool isStateSet(unsigned int const &state) const{ return ((flags & state) == state); };
+
+
+        T const states;
 
     private: 
         unsigned int flags;
@@ -25,12 +28,22 @@ class StateMachine
 
 struct GameStates
 {
-    unsigned int const STATE_NONE = 0;
-    unsigned int const STATE_INIT = 1;  // 2^0
-    unsigned int const STATE_MENU = 2;  // 2^1
-    unsigned int const STATE_PLAYING = 4;  // 2^2
-    unsigned int const STATE_PAUSED = 8; // 2^3
+    unsigned int const STATE_INIT = 1 << 0;  // 2^0
+    unsigned int const STATE_MENU = 1 << 1;  // 2^1
+    unsigned int const STATE_PLAYING = 1 << 2;  // 2^2
+    unsigned int const STATE_PAUSED = 1 << 3; // 2^3
 };
+
+struct PlayerStates
+{
+    unsigned int const STATE_SNEAKING = 1 << 0; 
+    unsigned int const STATE_WALKING = 1 << 1; 
+    unsigned int const STATE_RUNNING = 1 << 2; 
+    unsigned int const STATE_JUMPING = 1 << 3; 
+    unsigned int const STATE_IDLE = 1 << 4; 
+    unsigned int const STATE_DEAD = 1 << 5; 
+};
+
 
 #endif
 

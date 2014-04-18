@@ -5,7 +5,10 @@
 #include "./input.h"
 #include "./InputComponent.h"
 #include "./entity.h"
+#include "./State.h"
+
 #include "splash.h"
+#include <cstdio>
 
 void update()
 {
@@ -25,6 +28,9 @@ void onHBlank()
 
 int main(int argc, char **argv)
 {
+    StateMachine<GameStates> gameState; 
+    gameState.setState(gameState.states.STATE_INIT); 
+
     videoSetMode(MODE_0_2D); //top screen
     videoSetModeSub(MODE_0_2D); //bottom screen
 
@@ -37,13 +43,18 @@ int main(int argc, char **argv)
     //dmaCopy(splashPal, BG_PALETTE, 256*2);
 
     //TESTING METHODS
-    /* PrintConsole console; 
+    PrintConsole console; 
     PrintConsole other; 
     consoleInit(&other, 0, BgType_Text4bpp, BgSize_T_256x256, 2, 0, true, false);
     consoleInit(&console, 0, BgType_Text4bpp, BgSize_T_256x256, 2, 0, false, true);
     consoleSetWindow(&console, 0, 0, 32, 8);
     consoleSelect(&console);
-    Input input; 
+    printf("STATE_INIT: %s\n", gameState.isStateSet(gameState.states.STATE_INIT) ? "true" : "false");
+    printf("STATE_PAUSED: %s\n", gameState.isStateSet(gameState.states.STATE_PAUSED) ? "true" : "false");
+    gameState.setState(gameState.states.STATE_PAUSED);
+    printf("STATE_INIT: %s\n", gameState.isStateSet(gameState.states.STATE_INIT) ? "true" : "false");
+    printf("STATE_PAUSED: %s\n", gameState.isStateSet(gameState.states.STATE_PAUSED) ? "true" : "false");
+    /*Input input; 
     InputComponent inputComponent(input);
     inputComponent.printKeyData(&console);
     input.printKeyData(&console);
