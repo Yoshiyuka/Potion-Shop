@@ -3,6 +3,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 #include <nds.h>
 #include "./input.h"
+#include "./InputComponent.h"
 #include "./entity.h"
 #include "splash.h"
 

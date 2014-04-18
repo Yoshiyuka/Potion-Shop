@@ -6,7 +6,6 @@
 
 #include <nds.h>
 #include <memory>
-#include <cstdio>
 
 class Input
 {
@@ -21,14 +20,14 @@ class Input
         void disableTouchpad();
 
         //return read-only pointers to private data in this class. Allows outside classes to peek, but not alter.
-        std::shared_ptr<uint32 const> const watchKeyData() const; 
-        std::shared_ptr<touchPosition const> const watchTouchData() const;
+        std::weak_ptr<uint32 const> const watchKeyData() const; 
+        std::weak_ptr<touchPosition const> const watchTouchData() const;
 
     private:
-        uint32 keys; //bitmask of all held keys on keypad
+        std::shared_ptr<uint32> keyData; //bitmask of all held keys on keypad
         bool touchEnabled; //enable/disable touchpad
 
-        std::unique_ptr<touchPosition> touchData;
+        std::shared_ptr<touchPosition> touchData;
 };
 
 #endif

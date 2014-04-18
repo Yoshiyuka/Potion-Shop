@@ -3,7 +3,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 #include "./input.h"
 
-Input::Input() : keys(0), touchEnabled(false), touchData(new touchPosition)
+Input::Input() : keyData(new uint32), touchEnabled(false), touchData(new touchPosition)
 {
 }
 
@@ -14,7 +14,7 @@ Input::~Input()
 void Input::processInput()
 {
     scanKeys(); //must be called once per main game loop to enable keypad usage.
-    keys = keysDown();
+    *keyData = keysDown();
 
     if(touchEnabled)
     {
@@ -38,15 +38,15 @@ void Input::disableTouchpad()
 }
 
 //return a const shared pointer to const keypad data. Guarantee this function won't modify anything in the class.
-std::shared_ptr<uint32 const> const Input::watchKeyData() const
+std::weak_ptr<uint32 const> const Input::watchKeyData() const
 {
-    std::shared_ptr<uint32 const> result(&keys); 
-    return result;
+    //std::weak_ptr<uint32 const> result(&keys);
+    return keyData;
 }
 
 //return a const shared pointer to const touch data. Guarantee this function won't modify anything in the class. 
-std::shared_ptr<touchPosition const> const Input::watchTouchData() const
+std::weak_ptr<touchPosition const> const Input::watchTouchData() const
 {
-    std::shared_ptr<touchPosition const> result(touchData.get());
-    return result;
+    //std::weak_ptr<touchPosition const> result(touchData.get());
+    return touchData;
 }

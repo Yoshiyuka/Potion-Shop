@@ -7,18 +7,16 @@
 #include <nds.h>
 #include "./input.h"
 
-#include <cstdio>
-
 class InputComponent
 {
     public: 
         InputComponent(); 
         InputComponent(Input const &input);
-        ~InputComponent(); 
-
+        ~InputComponent();
+      
     private: 
-        std::shared_ptr<uint32 const> const keyData; 
-        std::shared_ptr<touchPosition const> const touchData;
+        std::weak_ptr<uint32 const> const keyData; 
+        std::weak_ptr<touchPosition const> const touchData;
 
 };
 

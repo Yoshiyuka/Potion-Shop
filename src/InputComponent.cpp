@@ -6,11 +6,10 @@
 InputComponent::InputComponent()
 {
 }
-
-InputComponent::InputComponent(Input const &input) : keyData(input.watchKeyData().get()), touchData(input.watchTouchData().get())
+InputComponent::~InputComponent()
 {
 }
 
-InputComponent::~InputComponent()
+InputComponent::InputComponent(Input const &input) : keyData(input.watchKeyData()), touchData(input.watchTouchData())
 {
 }
