@@ -10,13 +10,12 @@
 class InputComponent
 {
     public: 
-        InputComponent(); 
         InputComponent(Input const &input);
         ~InputComponent();
       
     private: 
-        std::weak_ptr<uint32 const> const keyData; 
-        std::weak_ptr<touchPosition const> const touchData;
+        uint32 const * const keyData; 
+        touchPosition const * const touchData;
 
 };
 

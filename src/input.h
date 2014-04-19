@@ -20,14 +20,14 @@ class Input
         void disableTouchpad();
 
         //return read-only pointers to private data in this class. Allows outside classes to peek, but not alter.
-        std::weak_ptr<uint32 const> const watchKeyData() const; 
-        std::weak_ptr<touchPosition const> const watchTouchData() const;
+        uint32 const * const watchKeyData() const; 
+        touchPosition const * const watchTouchData() const;
 
     private:
-        std::shared_ptr<uint32> keyData; //bitmask of all held keys on keypad
+        uint32 keyData; //bitmask of all held keys on keypad
         bool touchEnabled; //enable/disable touchpad
 
-        std::shared_ptr<touchPosition> touchData;
+        touchPosition touchData;
 };
 
 #endif
