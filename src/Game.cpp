@@ -7,7 +7,7 @@
 //check/set states before we do any further updating
 void Game::preUpdate()
 {
-    input.processInput();
+    //input.processInput();
     //I guess a switch statement will be fine for now just to move forward and get it done. 
     //TODO: possibly refactor into functors later.
     switch(peekState())
@@ -16,10 +16,8 @@ void Game::preUpdate()
         case(GameState::STATE_NONE):
         {
             //just going to display blank screen until input is received.
-            if((*(input.watchKeyData()) & KEY_A) == KEY_A)
-            {
-                this->pushState(GameState::STATE_INIT);
-            }
+            //timerStart(0, ClockDivider_1024, TIMER_FREQ_1024(1), test);
+            this->pushState(GameState::STATE_INIT); 
             break;
         }
         //Should only run once and immediately move to the next state. Don't set video modes and copy memory repeatedly.
