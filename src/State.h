@@ -18,7 +18,7 @@ class State
         State(function init, function update, function destroy);
         State(const State &rhs);
         State(State &&rhs);
-        State& operator=(const State &rhs);
+        State& operator=(State rhs);
         State& operator=(State &&rhs); 
 
         void init();

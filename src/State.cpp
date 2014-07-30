@@ -2,6 +2,8 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 #include "./State.h"
+#include <algorithm>
+
 State::State(function init, function update, function destroy) : onInit(init), onUpdate(update), onDestroy(destroy), active(false)
 {
 }
@@ -20,11 +22,11 @@ State::State(State &&rhs) : onInit(nullptr), onUpdate(nullptr), onDestroy(nullpt
     rhs.active = false;
 }
 
-State& State::operator=(const State &rhs)
+State& State::operator=(State rhs)
 {
-    onInit = rhs.onInit;
-    onUpdate = rhs.onUpdate;
-    onDestroy = rhs.onDestroy;
+    std::swap(onInit, rhs.onInit);
+    std::swap(onUpdate, rhs.onUpdate);
+    std::swap(onDestroy, rhs.onDestroy);
 
     return *this;
 }
