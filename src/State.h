@@ -4,46 +4,41 @@
 #ifndef STATE_H
 #define STATE_H
 
-//Originally wanted to do templated state machines to support bitfields of various sizes (char/short/int)
-//It's quicker to just implement a single type and keep it simple though. Avoid premature optimization.
+typedef void (*function)();
 
-template<class T> class StateMachine
+class State
+{
+    function onInit;
+    function onUpdate;
+    function onDestroy;
+
+    bool active;
+
+    public:
+        State(function init, function update, function destroy);
+        State(const State &rhs);
+        State(State &&rhs);
+        State& operator=(const State &rhs);
+        State& operator=(State &&rhs); 
+
+        void init();
+        void update();
+        void destroy();
+};
+
+class StateMachine
 {
     public: 
-        StateMachine(){};
-        ~StateMachine(){}
+        StateMachine() : currentState(State(nullptr, nullptr, nullptr)){};
+        ~StateMachine();
 
-        void setState(unsigned int const &state){ flags |= state; };
-        void toggleState(unsigned int const &state){ flags ^= state; };
-        void clearState(unsigned int const &state){ flags &= state; };
+        //State createState(const function init, const function update, const function destroy);
+        void setState(State state){ currentState = state; };
+        State getCurrentState();
 
-        bool isStateSet(unsigned int const &state) const{ return ((flags & state) == state); };
-
-
-        T const states;
-
-    private: 
-        unsigned int flags;
-};
-
-struct GameStates
-{
-    unsigned int const STATE_INIT = 1 << 0;  // 2^0
-    unsigned int const STATE_MENU = 1 << 1;  // 2^1
-    unsigned int const STATE_PLAYING = 1 << 2;  // 2^2
-    unsigned int const STATE_PAUSED = 1 << 3; // 2^3
-};
-
-struct PlayerStates
-{
-    unsigned int const STATE_SNEAKING = 1 << 0; 
-    unsigned int const STATE_WALKING = 1 << 1; 
-    unsigned int const STATE_RUNNING = 1 << 2; 
-    unsigned int const STATE_JUMPING = 1 << 3; 
-    unsigned int const STATE_IDLE = 1 << 4; 
-    unsigned int const STATE_DEAD = 1 << 5; 
+    private:
+        State currentState;
 };
 
 
 #endif
-
