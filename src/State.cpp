@@ -22,11 +22,13 @@ State::State(State &&rhs) : onInit(nullptr), onUpdate(nullptr), onDestroy(nullpt
     rhs.active = false;
 }
 
-State& State::operator=(State rhs)
+State& State::operator=(const State &rhs)
 {
-    std::swap(onInit, rhs.onInit);
-    std::swap(onUpdate, rhs.onUpdate);
-    std::swap(onDestroy, rhs.onDestroy);
+    State tmp = rhs;
+
+    std::swap(onInit, tmp.onInit);
+    std::swap(onUpdate, tmp.onUpdate);
+    std::swap(onDestroy, tmp.onDestroy);
 
     return *this;
 }
