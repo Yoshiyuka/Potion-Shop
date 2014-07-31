@@ -4,17 +4,41 @@
 #ifndef STATE_H
 #define STATE_H
 
-//Originally wanted to do templated state machines to support bitfields of various sizes (char/short/int)
-//It's quicker to just implement a single type and keep it simple though. Avoid premature optimization.
+typedef void (*function)();
 
-enum class GameState
+class State
 {
-    STATE_NONE = 0,
-    STATE_INIT,
-    STATE_MENU,
-    STATE_PLAYING,
-    STATE_PAUSED,
+    function onInit;
+    function onUpdate;
+    function onDestroy;
+
+    bool active;
+
+    public:
+        State(function init, function update, function destroy);
+        State(const State &rhs);
+        State(State &&rhs);
+        State& operator=(const State &rhs);
+        State& operator=(State &&rhs); 
+
+        void init();
+        void update();
+        void destroy();
 };
 
-#endif
+class StateMachine
+{
+    public: 
+        StateMachine() : currentState(State(nullptr, nullptr, nullptr)){};
+        ~StateMachine();
 
+        //State createState(const function init, const function update, const function destroy);
+        void setState(State state);
+        State getCurrentState();
+
+    private:
+        State currentState;
+};
+
+
+#endif

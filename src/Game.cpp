@@ -3,10 +3,17 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 #include "./Game.h"
 #include "splash.h"
+#include "State.h"
+#include "SplashState.h"
 
 //check/set states before we do any further updating
 void Game::preUpdate()
 {
+    State test(SplashState::onInit, SplashState::onUpdate, SplashState::onDestroy);
+    test.init();
+    test.update();
+    test.destroy();
+    /*
     //input.processInput();
     //I guess a switch statement will be fine for now just to move forward and get it done. 
     //TODO: possibly refactor into functors later.
@@ -58,6 +65,7 @@ void Game::preUpdate()
         }
 
     }
+    */
 }
 
 void Game::update()
@@ -67,23 +75,4 @@ void Game::update()
 void Game::render()
 {
 }
-
-void Game::pushState(GameState const &state)
-{
-    this->state.push(state);
-}
-
-void Game::popState()
-{
-    if(!state.empty())
-    {
-        state.pop();
-    }
-}
-
-GameState Game::peekState()
-{
-    return !state.empty() ? state.top() : GameState::STATE_NONE;
-}
-
 
