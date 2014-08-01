@@ -1,14 +1,8 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-#include <nds.h>
-#include "./Game.h"
-#include "./input.h"
-#include "./InputComponent.h"
-#include "./entity.h"
-#include "splash.h"
 
-#include <cstdio>
+#include "./main.h"
 
 void onVBlank()
 {
@@ -20,6 +14,7 @@ void onHBlank()
 
 int main(int argc, char **argv)
 {
+    StateMachine gameState;
     Game game; 
 
 

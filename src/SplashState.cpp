@@ -1,11 +1,13 @@
 #include "SplashState.h"
 #include <nds.h>
 #include "splash.h"
+#include "State.h"
 
 namespace SplashState
 {
     void onInit()
     {
+        setBrightness(3, -16);
         videoSetMode(MODE_5_2D);
         videoSetModeSub(MODE_0_2D);
 
@@ -16,6 +18,17 @@ namespace SplashState
 
         dmaCopy(splashBitmap, bgGetGfxPtr(bg3), 256*256);
         dmaCopy(splashPal, BG_PALETTE, 256*2);
+
+        for(int i = 0; i < 128; i++)
+        {
+            setBrightness(3, -16+(i/8));
+            swiWaitForVBlank();
+        }
+        for(int i = 0; i < 128; i++)
+        {
+            setBrightness(3, -(i/8));
+            swiWaitForVBlank();
+        }
     }
 
     void onUpdate()

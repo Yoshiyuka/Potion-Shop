@@ -1,5 +1,5 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef GAME_H
+#define GAME_H
 #include <nds.h>
 
 #include "./State.h"
@@ -8,13 +8,13 @@
 class Game
 {
     public: 
+        Game();
         void preUpdate(); 
         void update(); 
         void render(); 
 
     private: 
         Input input; 
-        StateMachine states;
 };
 
 #endif

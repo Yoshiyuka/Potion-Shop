@@ -40,5 +40,5 @@ class StateMachine
         State currentState;
 };
 
-
+extern StateMachine gameState;
 #endif
