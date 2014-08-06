@@ -4,6 +4,7 @@
 
 #include "./main.h"
 
+StateMachine gameState;
 void onVBlank()
 {
 }
@@ -14,7 +15,6 @@ void onHBlank()
 
 int main(int argc, char **argv)
 {
-    StateMachine gameState;
     Game game; 
 
 
@@ -45,7 +45,6 @@ int main(int argc, char **argv)
         game.preUpdate();
         game.update();
         game.render();
-        swiWaitForVBlank();
     }
     return 0;
 }

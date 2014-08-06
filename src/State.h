@@ -30,7 +30,7 @@ class StateMachine
 {
     public: 
         StateMachine() : currentState(State(nullptr, nullptr, nullptr)){};
-        ~StateMachine();
+        ~StateMachine(){};
 
         //State createState(const function init, const function update, const function destroy);
         void setState(State state);

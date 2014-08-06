@@ -73,6 +73,7 @@ void Game::preUpdate()
 
 void Game::update()
 {
+   // gameState.getCurrentState().update();
 }
 
 void Game::render()

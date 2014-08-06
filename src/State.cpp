@@ -73,6 +73,10 @@ void State::destroy()
 
 /*-----------------------------STATE MACHINE METHOD DEFINITIONS--------------------------------*/
 
+void StateMachine::setState(State state)
+{
+    currentState = state;
+}
 State StateMachine::getCurrentState()
 {
     return currentState;

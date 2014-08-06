@@ -1,7 +1,7 @@
 #include "SplashState.h"
 #include <nds.h>
 #include "splash.h"
-#include "State.h"
+#include "MenuState.h"
 
 namespace SplashState
 {
@@ -37,5 +37,8 @@ namespace SplashState
 
     void onDestroy()
     {
+        gameState.setState(State(MenuState::onInit, MenuState::onUpdate, MenuState::onDestroy));
+        gameState.getCurrentState().init();
+        //gameState.getCurrentState().update();
     }
 }
