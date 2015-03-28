@@ -2,12 +2,22 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 #include "./Game.h"
-#include "splash.h"
+//#include "splash.h"
+#include "SplashState.h"
 
+Game::Game()
+{
+    State test(SplashState::onInit, SplashState::onUpdate, SplashState::onDestroy);
+    test.init();
+    test.update();
+    test.destroy();
+
+}
 //check/set states before we do any further updating
 void Game::preUpdate()
 {
-    input.processInput();
+    /*
+    //input.processInput();
     //I guess a switch statement will be fine for now just to move forward and get it done. 
     //TODO: possibly refactor into functors later.
     switch(peekState())
@@ -16,10 +26,8 @@ void Game::preUpdate()
         case(GameState::STATE_NONE):
         {
             //just going to display blank screen until input is received.
-            if((*(input.watchKeyData()) & KEY_A) == KEY_A)
-            {
-                this->pushState(GameState::STATE_INIT);
-            }
+            //timerStart(0, ClockDivider_1024, TIMER_FREQ_1024(1), test);
+            this->pushState(GameState::STATE_INIT); 
             break;
         }
         //Should only run once and immediately move to the next state. Don't set video modes and copy memory repeatedly.
@@ -60,32 +68,15 @@ void Game::preUpdate()
         }
 
     }
+    */
 }
 
 void Game::update()
 {
+   // gameState.getCurrentState().update();
 }
 
 void Game::render()
 {
 }
-
-void Game::pushState(GameState const &state)
-{
-    this->state.push(state);
-}
-
-void Game::popState()
-{
-    if(!state.empty())
-    {
-        state.pop();
-    }
-}
-
-GameState Game::peekState()
-{
-    return !state.empty() ? state.top() : GameState::STATE_NONE;
-}
-
 

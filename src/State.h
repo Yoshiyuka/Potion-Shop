@@ -5,7 +5,6 @@
 #define STATE_H
 
 typedef void (*function)();
-
 class State
 {
     function onInit;
@@ -26,11 +25,11 @@ class State
         void destroy();
 };
 
-enum class GameState
+class StateMachine
 {
     public: 
         StateMachine() : currentState(State(nullptr, nullptr, nullptr)){};
-        ~StateMachine();
+        ~StateMachine(){};
 
         //State createState(const function init, const function update, const function destroy);
         void setState(State state);
@@ -40,5 +39,5 @@ enum class GameState
         State currentState;
 };
 
-
+extern StateMachine gameState;
 #endif
