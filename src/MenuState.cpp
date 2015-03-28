@@ -4,9 +4,9 @@
 #include "GUI.h"
 #include "Font.h"
 #include "uvcoord_glyphs.h"
-#include "glyphs.h"
+//#include "glyphs.h"
 
-#include "button.h"
+//#include "button.h"
 
 namespace MenuState
 {
