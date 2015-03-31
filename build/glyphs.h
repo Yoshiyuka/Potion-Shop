@@ -8,8 +8,8 @@
 //	+ bitmap not compressed
 //	Total size: 512 + 32768 = 33280
 //
-//	Time-stamp: 2014-08-08, 17:52:02
-//	Exported by Cearn's GBA Image Transmogrifier, v0.8.12
+//	Time-stamp: 2015-03-30, 22:49:44
+//	Exported by Cearn's GBA Image Transmogrifier, v0.8.10
 //	( http://www.coranac.com/projects/#grit )
 //
 //======================================================================
